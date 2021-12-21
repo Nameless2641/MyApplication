@@ -1,0 +1,67 @@
+﻿@using MyApplication.Models;
+@using System.Web.Mvc;
+@model LoginModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<div class="container">
+    <div class="row">
+        <div class="container container-fluid" style="padding-top:10px">
+            <h2 style="padding-bottom:10px">Login</h2>
+            <div class="row col-12">
+                @if (ViewData["ErrorMessage"] != null)
+                {
+                    <label class="alert-danger">@ViewData["ErrorMessage"]</label>
+                    ViewData["ErrorMessage"]= null;
+                }
+            </div>
+            @using (Html.BeginForm("LoginUser", "Home"))
+            {
+                <div class="row">
+                    <div class="form-group col-2">
+                        @Html.LabelFor(LoginModel => LoginModel.Mail)
+                    </div>
+                    <div class="form-group col-8">
+                        @Html.TextBoxFor(LoginModel => LoginModel.Mail)
+                    </div>
+                    <div class="col-2">
+                        @Html.ValidationMessageFor(LoginModel => LoginModel.Mail, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-2">
+                        @Html.LabelFor(LoginModel => LoginModel.Password)
+                    </div>
+                    <div class="col-8">
+                        @Html.PasswordFor(LoginModel => LoginModel.Password)
+                    </div>
+                    <div class="col-2">
+                        @Html.ValidationMessageFor(LoginModel => LoginModel.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="row" style="padding-top:20px">
+                    <div class="col-12" style="grid-column-end:auto">
+                        <input type="submit" value="Login" class="btn btn-primary btn-block" />
+                    </div>
+
+                </div>
+
+            }
+
+
+        </div>
+
+    </div>
+
+</div>
+
+

@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-dark navbar-fixed-top bg-dark">
+        <div class="container">
+            <div class="navbar-header">
+
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="icon-bar "></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("My Application", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class="nav-link"})</li>
+                    <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })</li>
+
+                </ul>
+            </div>
+            <div>
+                @if (Session["LoggedInUser"] != null){
+               
+                    <div class="row" style="padding-top:0px">
+                        <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "btn btn-primary" })</li>
+                        
+                    </div>
+                        
+           
+                    
+                }
+                else
+                { 
+                    
+                    <div class="row" style="padding-top:15px; padding-bottom:15px">
+                        <div>@Html.ActionLink("Login", "Login", "Home", null, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Register", "Register", "Home", null, new { @class = "btn btn-primary" })</div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer style="position:fixed; bottom:0;">
+            <p>&copy; 2021 -  @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/MyScripts")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

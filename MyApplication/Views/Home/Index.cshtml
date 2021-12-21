@@ -1,0 +1,70 @@
+﻿@using MyApplication.Models;
+@using System.Web.Mvc;
+
+@*@model User*@
+@model LoginModel
+@{
+    List<User> users = (List<User>)ViewData["Users"];
+}
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<div class="row">
+    <div>
+        @if (TempData["RegistrationMessage"] != null)
+        {
+            <div class="row text-success"><h2>@TempData["RegistrationMessage"]</h2></div>
+            TempData["RegistrationMessage"] = null;
+        }
+
+        <div class="col-md-4">
+            <h2>Register</h2>
+        </div>
+    </div>
+    @if(users!=null){<div class="col-md-12">
+        <h2>User List</h2>
+        <p>
+            <table class="table table-bordered">
+                <tr>
+                    <th>
+                        Surename
+                    </th>
+                    <th>
+                        Lastname
+                    </th>
+                    <th>
+                        Signup date
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in users)
+                {
+                    <tr>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.Lastname
+                        </td>
+                        <td>
+                            @item.SignupDate
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.UserID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </p>
+
+    </div>}
+
+</div>

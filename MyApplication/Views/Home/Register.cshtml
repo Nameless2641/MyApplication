@@ -1,0 +1,63 @@
+﻿@using System.Web.Mvc;
+@using MyApplication.Models;
+
+@model RegisterModel
+@{
+    ViewBag.Title = "RegisterView";
+}
+
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>Register</h2>
+        </div>
+        @using (Html.BeginForm("RegisterUser", "Home"))
+        {
+            <div class="row">
+                <div class="col-2">
+                    @Html.LabelFor(RegisterModel => RegisterModel.Name)
+                </div>
+                <div class="col-3">@Html.TextBoxFor(RegisterModel => RegisterModel.Name)</div>
+                <div class="col-4">@Html.ValidationMessageFor(RegisterModel => RegisterModel.Name, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="row">
+                <div class="col-2">@Html.LabelFor(RegisterModel => RegisterModel.Lastname)</div>
+                <div class="col-3">@Html.TextBoxFor(RegisterModel => RegisterModel.Lastname)</div>
+                <div class="col-4">@Html.ValidationMessageFor(RegisterModel => RegisterModel.Lastname, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="row">
+                <div class="col-2">@Html.LabelFor(RegisterModel => RegisterModel.Email)</div>
+                <div class="col-3">@Html.TextBoxFor(RegisterModel => RegisterModel.Email)</div>
+                <div class="col-4">@Html.ValidationMessageFor(RegisterModel => RegisterModel.Email, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="row">
+                <div class="col-2">@Html.LabelFor(RegisterModel => RegisterModel.ConfirmEmail)</div>
+                <div class="col-3">@Html.TextBoxFor(RegisterModel => RegisterModel.ConfirmEmail)</div>
+                <div class="col-4">@Html.ValidationMessageFor(RegisterModel => RegisterModel.ConfirmEmail, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="row">
+                <div class="col-2">@Html.LabelFor(RegisterModel => RegisterModel.Password)</div>
+                <div class="col-3">@Html.PasswordFor(RegisterModel => RegisterModel.Password)</div>
+                <div class="col-6">@Html.ValidationMessageFor(RegisterModel => RegisterModel.Password, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="row">
+                <div class="col-2">@Html.LabelFor(RegisterModel => RegisterModel.ConfirmPassword)</div>
+                <div class="col-3">@Html.PasswordFor(RegisterModel => RegisterModel.ConfirmPassword)</div>
+                <div class="col-4">@Html.ValidationMessageFor(RegisterModel => RegisterModel.ConfirmPassword, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-12" style="grid-column-end:auto">
+                    <input type="submit" value="Register" class="btn btn-primary btn-block" />
+                </div>
+
+            </div>
+
+        }
+
+
+    </div>
+
+
+</body>
+

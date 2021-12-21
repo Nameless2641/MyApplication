@@ -1,0 +1,120 @@
+﻿@using MyApplication.Models;
+@using System.Web.Mvc;
+@{
+    ViewBag.Title = "Home";
+}
+@{User U = (User)ViewData["User"]; }
+
+
+<head>
+    <meta charset='utf-8' />
+    <link href='~/Content/main.css' rel='stylesheet' />
+    <script src='~/Scripts/lib/jquery.min.js'></script>
+    <script src='~/Scripts/lib/moment.min.js'></script>
+    <script src='~/Scripts/fullcalendar/main.js'></script>
+    <script src="~/Scripts/MyScripts/CalendarScript.js"></script>
+    <script>
+
+        
+        
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            entries = [];
+            $.ajax({
+                type: "GET",
+                url: "/Calendar/GetEntries",
+
+                success: function (data) {
+                    $.each(data, function (i, v) {
+                        entries.push({
+                            id: v.EntryID,
+                            title: v.Title,
+                            start: v.StartTime,
+                            end: v.EndTime,
+                            description: v.Description
+                        });
+
+
+                    })
+
+                },
+                error: function (error) {
+                    alert('failed request');
+                }
+
+
+            });
+
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+
+                initialView: 'dayGridMonth',
+                selectable: true,
+                events: [{entries}]
+                
+                
+            });
+            console.log(entries);
+            calendar.render();
+
+        });
+
+
+
+       
+        
+
+
+    </script>
+</head>
+<div class="container">
+    <div class="col-12">
+        <h2>Welcome @U.Name</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-12"><h3>Your Profile Page</h3></div>
+    </div>
+    <div class="row">
+
+      
+        
+            <div class="col float-left">
+                <div class="row" style="padding-left:20px">
+                    <div class="col-lg-auto float-lg-right">
+                        <img src="~/Pictures/Default.jpg" style="height:150px; width:auto" />
+                    </div>
+                    
+                </div>
+
+                <div class="row">
+                    <div class="col-2">
+                        <b>
+                            Name:
+                        </b>
+                    </div>
+                    <div class="col-auto">
+                        @U.Name @U.Lastname
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">                   
+                        <b>Email:</b>                       
+                    </div>
+
+                    <div class="col-auto">@U.Email</div>
+
+                </div>
+                <div class="col-6"></div>
+            </div>
+            <div class="col-6 float-right">
+                <div id="calendar"></div>
+            </div>
+            
+        
+
+    </div>
+</div>
+
+
